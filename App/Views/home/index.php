@@ -1,7 +1,7 @@
 <?php require_once __DIR__.'/../header.php'; ?> 
-
 <div role="main" class="main-content">
-    <h1>Welcome to Guitar E-commerce</h1>
+    
+<h1>Welcome to Guitar E-commerce</h1>
 
     <div class="products-grid">
         <!-- Loop through products and display them -->

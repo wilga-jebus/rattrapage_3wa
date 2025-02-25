@@ -10,12 +10,21 @@ require_once __DIR__ . '/../header.php';
         <!-- Form to add a new product -->
         <div class="add_product_form">
             <h2>Add New Product</h2>
-            <form method="post" action="/admin/products/add">
+            <form method="post" action="index.php?route=admin/add_product">
+            
                 <label for="name">Product Name:</label>
                 <input type="text" id="name" name="name" required>
                 <br>
                 <label for="price">Price:</label>
                 <input type="text" id="price" name="price" required>
+                <br>
+                <select id="category" name="category" required>
+            
+                <option value="3" >3</option>  
+                <option value="4" >4</option> 
+                <option value="5" >5</option>
+                <option value="6" >6</option>                                
+               </select>
                 <br>
                 <label for="description">Description:</label>
                 <textarea id="description" name="description" required></textarea>

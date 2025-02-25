@@ -4,9 +4,13 @@ body {
     background-color: #E0FFFF; 
     margin: 0;
     padding: 0;
+    /*padding-top: 100px;*/
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    position:relative;
+    
+    
 }
 
 h1 {
@@ -26,6 +30,9 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 0;
+    height:40px;
+    
 }
 
 .navbar {
@@ -90,6 +97,7 @@ footer {
     width: 100%;
     position: fixed;
     bottom: 0;
+    z-index: 1000;
 }
 
 /* Styles for the main content */
@@ -98,21 +106,27 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 100px; 
+    /*padding-top: 120px; */
     padding-bottom: 80px; 
     width: 100%;
-    overflow: auto; 
+    overflow: visible;
+    /*overflow: scroll;*/ 
     flex-direction: column;
+    position: relative;
+    z-index: 500;
+    
 }
 
 
-.main-content {
-    padding-top: 80px; 
+.main-content .products-content {
+   /* padding-top:80px;*/
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
+    
+    
 }
 
 .main-content h1 {
@@ -760,7 +774,7 @@ body.dark-mode tr:hover {
 .products-section {
     width: 100%;
     max-width: 1200px;
-    padding: 20px;
+    padding-top: 400px;
     box-sizing: border-box;
 }
 
@@ -773,6 +787,9 @@ body.dark-mode tr:hover {
     padding: 20px;
     box-sizing: border-box;
     justify-content: center;
+    /*padding-top: 500px;*/
+    /*margin-top: 1000px;*/
+    
 }
 
 .product-card {

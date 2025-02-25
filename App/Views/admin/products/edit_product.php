@@ -8,7 +8,8 @@ require_once __DIR__ . '/../../header.php';
     <h1>Edit Product</h1>
     
     <?php if ($product): ?>
-        <form method="post" action="index.php?route=admin/update_product&id=<?php echo $product['productID']; ?>">
+        <form method="post" action="index.php?route=admin/update_product&id=<?php echo $product['productID']; ?>
+        &price=<?php echo $product['listPrice']; ?>&description=<?php echo $product['description']; ?>&categoryID=<?php echo $product['categoryID']; ?>">
             <label for="name">Product Name:</label>
             <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($product['productName']); ?>" required>
             <br>

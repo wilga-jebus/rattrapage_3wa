@@ -2,8 +2,8 @@
 $title = 'Products';
 require_once __DIR__ . '/../../header.php';
 ?>
-
-<section class="products-section">
+<!-- ici était products-section -->
+<section class="main-content products-content"> 
     <h1>Products</h1>
 
     <div class="products-grid">
