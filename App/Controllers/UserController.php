@@ -32,7 +32,6 @@ class UserController
                 $_SESSION['isadmin'] = $user['isAdmin']; 
 
                 if ($user['isAdmin'] == 1) {
-                   
                     require_once __DIR__ . '/../Views/admin/index.php';
                 } else {
                     header('Location: index.php?route=profile'); // Redirect to user profile
@@ -59,7 +58,6 @@ class UserController
             $userModel = new User($this->pdo);
             $userModel->createUser($email, $password, $firstName, $lastName, $isadmin);
 
-            
             header('Location: index.php?route=login');
             exit();
         }
@@ -90,7 +88,6 @@ class UserController
             $userModel = new User($this->pdo);
             $userModel->createAdmin($email, $password, $firstName, $lastName);
 
-            
             header('Location: index.php?route=admin');
             exit();
         }
@@ -111,7 +108,7 @@ class UserController
         }
 
         $userModel = new User($this->pdo);
-        $user = $userModel->getUserById($_SESSION['user_id']);
+        $user = $userModel->getUserById(filter_var($_SESSION['user_id'], FILTER_SANITIZE_NUMBER_INT));
 
         require_once __DIR__ . '/../views/user/profile.php';
     }

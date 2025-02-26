@@ -3,7 +3,7 @@ $title = 'Login';
 require_once __DIR__ . '/../header.php';
 ?>
 
-<divdiv role="main" class="main-content">
+<div role="main" class="main-content">
     <div class="login-container" role="form" aria-labelledby="login-heading">
         <h1 id="login-heading">Login</h1>
         <?php if (isset($error)): ?>
@@ -20,7 +20,7 @@ require_once __DIR__ . '/../header.php';
         </form>
         <p>Don't have an account? <a href="index.php?route=register">Register here</a>.</p>
     </div>
-</>
+</div>
 
 <?php require_once __DIR__ . '/../footer.php'; ?>
 

@@ -134,10 +134,10 @@ class AdminController
     public function updateProduct($id)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $name = $_POST['name'];
-            $price = $_POST['price'];
-            $description = $_POST['description'];
-            $categoryID = $_POST['category'];
+            $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+            $price = filter_var($_POST['price'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+            $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
+            $categoryID = filter_var($_POST['categoryID'], FILTER_SANITIZE_NUMBER_INT);
 
             $productModel = new Product($this->pdo);
             $productModel->updateProduct($id, $name, $price, $description, $categoryID);

@@ -15,7 +15,7 @@
                 <a href="index.php?route=home" aria-label="Home"><i class="fas fa-home"></i></a>
             </div>
             <div class="navbar-logo">
-                <h1>Ma Première Guitare</h1>
+                <h1>Ma Première Guitare Shop</h1>
             </div>
             <div class="navbar-right">
                 <?php if (isset($_SESSION['isadmin']) && $_SESSION['isadmin'] == 0): ?>
@@ -29,7 +29,7 @@
                     <a href="index.php?route=products">Guitars</a>
                     <a href="index.php?route=categories">Categories</a>
                     <a href="index.php?route=cart" aria-label="Cart"><i class="fas fa-shopping-cart"></i></a>
-                    <a id="login-logout-link" href="index.php?route=login" aria-label="Login"><i class="fas fa-sign-in-alt"></i></a>
+                    <a id="login-logout-link" href="index.php?route=login" aria-label="Login">Login</a>
                 <?php endif; ?>
                 <button id="dark-mode-toggle" aria-label="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
             </div>

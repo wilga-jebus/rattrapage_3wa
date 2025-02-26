@@ -67,7 +67,13 @@ class Product
         $dateAdded = filter_var($dateAdded, FILTER_SANITIZE_STRING);
 
         // Generate a unique product code
-        $productCode = uniqid('prod_');
+        do {
+            $productCode = uniqid('prod_');
+            $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM products WHERE productCode = :productCode");
+            $stmt->bindParam(':productCode', $productCode, \PDO::PARAM_STR);
+            $stmt->execute();
+            $count = $stmt->fetchColumn();
+        } while ($count > 0);
 
         // Convert dateAdded to the correct format for MySQL datetime
         $dateAdded = date('Y-m-d H:i:s', strtotime($dateAdded));

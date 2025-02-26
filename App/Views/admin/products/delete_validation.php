@@ -1,15 +1,6 @@
 <?php
 $title = 'Delete Product';
 require_once __DIR__ . '/../../header.php';
-require_once __DIR__ . '/../../../../config/config.php';
-use App\Controllers\AdminController;
-use App\Models\Product;
-$pdo = getDatabaseConnection();
-$productModel = new AdminController($pdo);
-$productModel->deleteProduct($_GET['id']);
-
-
-
 ?>
 <h1>Delete Product</h1>
 

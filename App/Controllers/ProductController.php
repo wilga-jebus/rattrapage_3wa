@@ -19,14 +19,14 @@ class ProductController
     {
         $productModel = new Product($this->pdo);
         $products = $productModel->getAllProducts();
-        //return $products;
         require_once __DIR__ . '/../Views/admin/products/index.php';
-        
     }
 
     // Display a single product
     public function view($id)
     {
+        $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+        
         // Fetch product details from the database
         $productModel = new Product($this->pdo);
         $product = $productModel->getProductById($id);
@@ -42,19 +42,14 @@ class ProductController
         }
     }
 
-    
-    
-
-    
-
     // Handle adding a new product
     public function addProduct()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $name = $_POST['name'];
-            $price = $_POST['price'];
-            $description = $_POST['description'];
-            $categoryID = $_POST['categoryID'];
+            $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+            $price = filter_var($_POST['price'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+            $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
+            $categoryID = filter_var($_POST['categoryID'], FILTER_SANITIZE_NUMBER_INT);
 
             $productModel = new Product($this->pdo);
             $productModel->addProduct($name, $price, $description, $categoryID);
@@ -67,6 +62,8 @@ class ProductController
     // Display the edit product form
     public function editProductForm($id)
     {
+        $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+        
         $productModel = new Product($this->pdo);
         $product = $productModel->getProductById($id);
         require_once __DIR__ . '/../Views/admin/products/edit_product.php';
@@ -75,13 +72,16 @@ class ProductController
     // Handle updating a product
     public function updateProduct($id)
     {
+        $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $name = $_POST['name'];
-            $price = $_POST['price'];
-            $description = $_POST['description'];
+            $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+            $price = filter_var($_POST['price'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+            $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
+            $categoryID = filter_var($_POST['categoryID'], FILTER_SANITIZE_NUMBER_INT);
 
             $productModel = new Product($this->pdo);
-            $productModel->updateProduct($id, $name, $price, $description);
+            $productModel->updateProduct($id, $name, $price, $description, $categoryID);
 
             header('Location: index.php?route=admin/products');
             exit();
@@ -95,6 +95,8 @@ class ProductController
     // Handle deleting a product
     public function deleteProduct($id)
     {
+        $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+        
         $productModel = new Product($this->pdo);
         $product = $productModel->getProductById($id);
 

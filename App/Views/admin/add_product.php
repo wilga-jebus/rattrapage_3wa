@@ -31,6 +31,6 @@
         <button type="submit">Add Product</button>
     </form>
 
-    <a href="/admin/products">Back to Products</a>
+    <a href="index.php?route=admin/products">Back to Products</a>
 
     <?php require_once __DIR__ . '/../footer.php'; ?>

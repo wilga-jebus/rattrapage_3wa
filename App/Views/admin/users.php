@@ -27,8 +27,8 @@ require_once __DIR__ . '/../header.php';
                         <td><?php echo htmlspecialchars($user['firstName']); ?></td>
                         <td><?php echo htmlspecialchars($user['lastName']); ?></td>
                         <td>
-                            <a href="index.php?route=admin_edit_user&id=<?php echo $user['userID']; ?>">Edit</a>
-                            <a href="index.php?route=admin_delete_user&id=<?php echo $user['userID']; ?>">Delete</a>
+                            <a href="index.php?route=admin_edit_user&id=<?php echo htmlspecialchars($user['userID']); ?>">Edit</a>
+                            <a href="index.php?route=admin_delete_user&id=<?php echo htmlspecialchars($user['userID']); ?>">Delete</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
