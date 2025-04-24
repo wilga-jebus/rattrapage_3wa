@@ -3,14 +3,18 @@ $title = 'Products';
 require_once __DIR__ . '/../../header.php';
 ?>
 <!-- ici était products-section -->
-<section class="main-content products-content"> 
-    <h1>Products</h1>
 
-    <div class="products-grid">
+<div class="row limited">
+            <section class="column small-12">
+                <h1>products</h1>
+            </section>
+        </div><!-- end row -->
+
+    <div class="row limited">
         <?php if (is_array($products) || is_object($products)): ?>
             <?php foreach ($products as $product): ?>
-                <div class="product-card">
-                    <img src="public/images/products/<?php echo htmlspecialchars($product['productCode']); ?>.png" alt="<?php echo htmlspecialchars($product['productName']); ?>">
+                <div class="column small-6 medium-4  large-3">
+                    <img src="public/images/products/<?php echo htmlspecialchars($product['productCode']); ?>.jpg" alt="<?php echo htmlspecialchars($product['productName']); ?>">
                     <h2><?php echo htmlspecialchars($product['productName']); ?></h2>
                     <p><?php echo htmlspecialchars($product['description']); ?></p>
                     <p>Price: <span class="price" data-price="<?php echo htmlspecialchars($product['listPrice']); ?>"><?php echo htmlspecialchars($product['listPrice']); ?> USD</span></p>
@@ -30,7 +34,7 @@ require_once __DIR__ . '/../../header.php';
             <p>No products available.</p>
         <?php endif; ?>
     </div>
-</section>
+
 
 <?php
 require_once __DIR__ . '/../../footer.php';

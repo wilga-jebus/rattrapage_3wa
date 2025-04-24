@@ -3,11 +3,12 @@ $title = 'Login';
 require_once __DIR__ . '/../header.php';
 ?>
 
-<div role="main" class="main-content">
-    <div class="login-container" role="form" aria-labelledby="login-heading">
-        <h1 id="login-heading">Login</h1>
+
+    <div class="row limited">
+       <section class="column small-12 labeled"> 
+        <h1>Login</h1>
         <?php if (isset($error)): ?>
-            <p role="alert"><?php echo htmlspecialchars($error); ?></p>
+            <p ><?php echo htmlspecialchars($error); ?></p>
         <?php endif; ?>
         <form method="post" action="index.php?route=login">
             <label for="email">Email:</label>
@@ -19,8 +20,9 @@ require_once __DIR__ . '/../header.php';
             <button type="submit">Login</button>
         </form>
         <p>Don't have an account? <a href="index.php?route=register">Register here</a>.</p>
+        </section>
     </div>
-</div>
+
 
 <?php require_once __DIR__ . '/../footer.php'; ?>
 

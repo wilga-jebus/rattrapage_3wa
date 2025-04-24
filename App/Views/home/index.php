@@ -1,31 +1,82 @@
-<?php require_once __DIR__.'/../header.php'; ?> 
-<div role="main" class="main-content">
-    
-<h1>Welcome to Guitar E-commerce</h1>
+<?php require_once __DIR__ . '/../header.php'; ?>
 
-    <div class="products-grid">
-        <!-- Loop through products and display them -->
-        <?php if (is_array($products) || is_object($products)): ?>
-            <?php foreach ($products as $product): ?>
-                <div class="product-card">
-                    <img src="public/images/products/<?php echo htmlspecialchars($product['productCode']); ?>.png" alt="<?php echo htmlspecialchars($product['productName']); ?>" class="rotated-image">
-                    <h2><?php echo htmlspecialchars($product['productName']); ?></h2>
-                    <p><?php echo htmlspecialchars($product['description']); ?></p>
-                    <p class="price" data-price="<?php echo htmlspecialchars($product['listPrice']); ?>">Price: $<?php echo htmlspecialchars($product['listPrice']); ?></p>
-                    <select class="currency-selector">
-                        <option value="USD">USD</option>
-                        <option value="EUR">EUR</option>
-                        <option value="GBP">GBP</option>
-                        <!-- Add more currencies as needed -->
-                    </select>
-                    <a href="index.php?route=cart_add&id=<?php echo htmlspecialchars($product['productID']); ?>">Add to Cart</a>
-                </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p>No products available.</p>
-        <?php endif; ?>
-    </div>
+
+
+<div class="row limited">
+    <section class="column small-12">
+        <img src="public/images/homePage/homepage.jpg" class="homepage" alt="" width="1140" height="561">
+    </section>
 </div>
 
-<?php require_once __DIR__.'/../footer.php'; ?>
+<div class="row limited">
+    <section class="column small-12 ">
+        <h1>Our Specials Products</h1>
+    </section>
+</div>
+<div class="row limited">
+    <section class="column small-12 medium-6 labeled">
+        <img src="public/images/products/GTR002.jpg" alt="" width="250"height="250">
+        <h6>GUITARE 1</h6>
+                <select class="currency-selector">
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="GBP">GBP</option>
+                    <!-- Add more currencies as needed -->
+                </select>
+                <p class="price">1000$</p>
+             <p><a href="#">add to cart </a></p>
+    </section>
+    <section class="column small-12 medium-6 labeled">
+        <img src="public/images/products/GTR002.jpg" alt="">
+        <h6>GUITARE2</h6>
+            <p class="price">1000$</p>
+                <select class="currency-selector">
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="GBP">GBP</option>
+                    <!-- Add more currencies as needed -->
+                </select>
+             <p><a href="#">add to cart</a></p>
+    </section>
+    <section class="column small-12 medium-6 labeled">
+        <img src="public/images/products/GTR002.jpg" alt="">
+        <h6>GUITARE3</h6>
+            <p class="price">1000$</p>
+                <select class="currency-selector">
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="GBP">GBP</option>
+                    <!-- Add more currencies as needed -->
+                </select>
+             <p><a href="#">add to cart</a></p>
+    </section>
+    <section class="column small-12 medium-6 labeled">
+        <img src="public/images/products/GTR002.jpg" alt="">
+        <h6>GUITARE2</h6>
+            <p class="price">1000$</p>
+                <select class="currency-selector">
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="GBP">GBP</option>
+                    <!-- Add more currencies as needed -->
+                </select>
+             <p><a href="#">add to cart</a></p>
+    </section>
+    <section class="column small-12 medium-6 labeled">
+        <img src="public/images/products/GTR002.jpg" alt="">
+        <h6>GUITARE4</h6>
+            <p class="price">1000$</p>
+                <select class="currency-selector">
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="GBP">GBP</option>
+                    <!-- Add more currencies as needed -->
+                </select>
+             <p><a href="#">add to cart</a></p>
+    </section>
 
+
+
+
+</div>
+<?php require_once __DIR__ . '/../footer.php'; ?>

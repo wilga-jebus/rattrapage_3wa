@@ -1,38 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($title ?? 'My Application'); ?></title>
-    <link rel="stylesheet" href="/ma_premiere_guitare/public/css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script defer src="/ma_premiere_guitare/public/js/script.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,700;1,300&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./public/css/normalize.css">
+    <link rel="stylesheet" href="./public/css/small.css">
+    <link rel="stylesheet" href="./public/css/medium.css">
+    <link rel="stylesheet" href="./public/css/large.css">
+
+    <title>Home | Ma Prmiere Guitare Shop</title>
+
 </head>
+
 <body>
-    <header role="banner">
-        <nav class="navbar" role="navigation" aria-label="Main Navigation">
-            <div class="navbar-left">
-                <a href="index.php?route=home" aria-label="Home"><i class="fas fa-home"></i></a>
-            </div>
-            <div class="navbar-logo">
-                <h1>Ma Première Guitare Shop</h1>
-            </div>
-            <div class="navbar-right">
-                <?php if (isset($_SESSION['isadmin']) && $_SESSION['isadmin'] == 0): ?>
-                    <a href="index.php?route=products">Guitars</a>
-                    <a href="index.php?route=categories">Categories</a>
-                    <a href="index.php?route=logout" aria-label="Logout">Logout</a>
-                <?php elseif (isset($_SESSION['isadmin']) && $_SESSION['isadmin'] == 1): ?>
-                    <a href="index.php?route=back_to_dashboard" aria-label="Admin">Admin Menu</a>
-                    <a href="index.php?route=logout" aria-label="Logout">Logout</a>
-                <?php else: ?>
-                    <a href="index.php?route=products">Guitars</a>
-                    <a href="index.php?route=categories">Categories</a>
-                    <a href="index.php?route=cart" aria-label="Cart"><i class="fas fa-shopping-cart"></i></a>
-                    <a id="login-logout-link" href="index.php?route=login" aria-label="Login">Login</a>
-                <?php endif; ?>
-                <button id="dark-mode-toggle" aria-label="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
-            </div>
-        </nav>
+    <header class="clearfix">
+        <div class="row limited">
+            <section class="column small-12">
+                <h1>Ma Premiere</h1>
+                <h2>Guitare Shop</h2>
+            </section>
+        </div> <!-- end row -->
     </header>
-    <main role="main">
+    <nav class="clearfix">
+        <div class="row limited">
+            <button id="guitarBtn">&#9776;</button>
+            <ul class="primaryNav ">
+                <li class="active"><a href="index.php?route=home">HOME</a></li>
+                <?php if (isset($_SESSION['isadmin']) && $_SESSION['isadmin'] == 0): ?>
+                    <li><a href="index.php?route=products">Guitars</a></li>
+                    <li><a href="index.php?route=categories">Categories</a></li>
+                    <li><a href="index.php?route=logout">Logout</a></li>
+                <?php elseif (isset($_SESSION['isadmin']) && $_SESSION['isadmin'] == 1): ?>
+                    <li><a href="index.php?route=back_to_dashboard">Admin Menu</a></li>
+                    <li><a href="index.php?route=logout">Logout</a></li>
+                <?php else: ?>
+                    <li><a href="index.php?route=products">Guitars</a></li>
+                    <li><a href="index.php?route=categories">Categories</a></li>
+                    <li><a href="index.php?route=cart">CART</a></li>
+                    <li><a id="login-logout-link" href="index.php?route=login">Login</a></li>
+                <?php endif; ?>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="clearfix">
