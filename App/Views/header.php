@@ -6,17 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,700;1,300&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="./public/css/normalize.css">
+    <!-- <link rel="stylesheet" href="./public/css/normalize.css">
     <link rel="stylesheet" href="./public/css/small.css">
     <link rel="stylesheet" href="./public/css/medium.css">
-    <link rel="stylesheet" href="./public/css/large.css">
+    <link rel="stylesheet" href="./public/css/large.css"> -->
+    <link rel="stylesheet" href="./public/css/sass.css">
+
 
     <title>Home | Ma Prmiere Guitare Shop</title>
 
 </head>
 
 <body>
-    <header class="clearfix">
+    <header >
         <div class="row limited">
             <section class="column small-12">
                 <h1>Ma Premiere</h1>
@@ -24,7 +26,7 @@
             </section>
         </div> <!-- end row -->
     </header>
-    <nav class="clearfix">
+    <nav >
         <div class="row limited">
             <button id="guitarBtn">&#9776;</button>
             <ul class="primaryNav ">
@@ -46,4 +48,4 @@
         </div>
     </nav>
 
-    <main class="clearfix">
+    <main>

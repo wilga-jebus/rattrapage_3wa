@@ -1,11 +1,16 @@
 <?php
   require_once __DIR__ . '/../header.php';
 ?>
-
-<div role="main" class="main-content">
-    <div class="category-container">
-        <h1 class="category-title">Categories</h1>
-        <ul class="category-list">
+  <div class="row limited">
+        <section class="column small-12  form-title">
+            <h1>Categories</h1> 
+        </section>
+    </div>
+     <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div class="row limited">
+  <section class="column small-12">
+    
+        <ul class="login-form">
             <?php if (isset($categories) && is_array($categories)): ?>
                 <?php foreach ($categories as $category): ?>
                     <li class="category-item">
@@ -18,7 +23,7 @@
                 <li>No categories found.</li>
             <?php endif; ?>
         </ul>
-    </div>
+ </section>
 </div>
 
 <?php require_once __DIR__ . '/../footer.php'; ?>
