@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../header.php';
 <!-- ici était products-section -->
 
         <div class="row limited">
-            <section class="column small-12">
+            <section class="column small-12 row-center-h1">
                 <h1>products</h1>
             </section>
         </div><!-- end row -->

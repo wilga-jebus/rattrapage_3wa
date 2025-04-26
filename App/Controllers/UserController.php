@@ -21,10 +21,25 @@ class UserController
             $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
             $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
 
-            $userModel = new User($this->pdo);
-            $user = $userModel->getUserByEmail($email);
+            $errors = []; 
 
-            if ($user && password_verify($password, $user['password'])) {
+            if (strlen(trim($password)) < 8) {
+                $errors[] = "La longueur du mot de passe doit être d'au moins 8 caractères.";
+            }
+            
+            
+            
+            if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $errors[] = "Veuillez renseigner une adresse email valide.";
+            }
+            
+            // More validations possible
+
+    
+            if(empty($errors)) {
+                $userModel = new User($this->pdo);
+               $user = $userModel->getUserByEmail($email);
+               if ($user && password_verify($password, $user['password'])) {
                 if (session_status() == PHP_SESSION_NONE) {
                     session_start();
                 }
@@ -35,36 +50,72 @@ class UserController
                     require_once __DIR__ . '/../Views/admin/index.php';
                 } else {
                     header('Location: index.php?route=profile'); // Redirect to user profile
+                    exit();
                 }
+                
+            } 
+                
+                header('Location: index.php?route=profile');
                 exit();
             } else {
-                $error = "Invalid email or password.";
+                require_once __DIR__ . '/../Views/user/login.php';
+
             }
+
+            
         }
 
-        require_once __DIR__ . '/../views/user/login.php';
+        require_once __DIR__ . '/../Views/user/login.php';
     }
 
     // Handle user registration
     public function register()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            
             $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
             $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
             $firstName = filter_var($_POST['firstName'], FILTER_SANITIZE_STRING);
             $lastName = filter_var($_POST['lastName'], FILTER_SANITIZE_STRING);
             $isadmin = isset($_POST['isadmin']) ? 1 : 0;
 
-            $userModel = new User($this->pdo);
-            $userModel->createUser($email, $password, $firstName, $lastName, $isadmin);
+            $errors = [];
 
-            header('Location: index.php?route=login');
-            exit();
+            if (strlen(trim($password)) < 8) {
+                $errors[] = "La longueur du mot de passe doit être d'au moins 8 caractères.";// translate in english in final version.
+            }
+            
+            if(empty(trim($firstName)) || strlen(trim($firstName)) < 2) {
+                $errors[] = "Veuillez renseigner votre firstName.(minimum 2 lettres)";
+            }
+            
+            if(empty(trim($lastName)) || strlen(trim($lastName)) < 2) {
+                $errors[] = "Veuillez renseigner votre lastName.(minimum 2 lettres)";
+            }
+            
+            if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $errors[] = "Veuillez renseigner une adresse email valide.";
+            }
+            
+            // More validations possible
+
+    
+            if(empty($errors)) {
+                $userModel = new User($this->pdo);
+                $userModel->createUser($email, $password, $firstName, $lastName, $isadmin);
+                header('Location: index.php?route=login');
+                exit();
+            } else {
+                require_once __DIR__ . '/../Views/user/register.php';
+
+            }
+
+
         }
 
         require_once __DIR__ . '/../Views/user/register.php';
-    }
-
+       
+    }    
     // Handle administrator registration
     public function adminRegister()
     {
@@ -110,7 +161,7 @@ class UserController
         $userModel = new User($this->pdo);
         $user = $userModel->getUserById(filter_var($_SESSION['user_id'], FILTER_SANITIZE_NUMBER_INT));
 
-        require_once __DIR__ . '/../views/user/profile.php';
+        require_once __DIR__ . '/../Views/user/profile.php';
     }
 
     // Handle user logout
@@ -121,7 +172,7 @@ class UserController
         }
         session_unset();
         session_destroy();
-        header('Location: index.php?route=login');
+        header('Location: index.php?route=home');
         exit();
     }
 }

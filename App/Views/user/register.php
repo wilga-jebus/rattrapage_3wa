@@ -4,15 +4,25 @@ require_once __DIR__ . '/../header.php';
 ?>
 
 <div class="row limited">
-    <section class="column small-12  form-title">
-        <h1>Register</h1>
+    <section class="column small-12 ">
+        <h1 class="row-center-h1">Register</h1>
     </section>
 </div>
 
    <div class="row limited">
     <section class="column small-12 labeled">
 
-    <form method="post" action="index.php?route=register" class="register-form">
+    <?php if (isset($errors) && count($errors) > 0) : ?>
+              <section id="errors" class="errors-messages-container">
+                <ul>
+                    <?php foreach ($errors as $error) : ?>
+                        <li class="error-message"><?= htmlspecialchars($error) ?></li>
+                    <?php endforeach; ?>
+                </ul>
+              </section>
+    <?php endif; ?>
+
+    <form method="post" action="index.php?route=register" class="register-form register-form-height">
             <div>
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required aria-required="true">

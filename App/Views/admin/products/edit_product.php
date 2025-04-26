@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../header.php';
 ?>
 <div class="row limited">
         <section class="column small-12  form-title">
-            <h1>Edit Products</h1> 
+            <h1 class="row-center-h1">Edit Products</h1> 
         </section>
     </div>
 
@@ -16,23 +16,22 @@ require_once __DIR__ . '/../../header.php';
         <section class="column small-12">
         <form method="post" action="index.php?route=admin/update_product&id=<?php echo $product['productID']; ?>
         &price=<?php echo $product['listPrice']; ?>&description=<?php echo $product['description']; ?>&categoryID=<?php echo $product['categoryID']; ?>"
-        class="login-form">
+        class="login-form login-form-height">
              <div>
             <label for="name">Product Name:</label>
             <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($product['productName']); ?>" required>
             </div>
-            <br>
+            
             <div>
             <label for="price">Price:</label>
             <input type="text" id="price" name="price" value="<?php echo htmlspecialchars($product['listPrice']); ?>" required>
            </div>   
-            <br><br><br>
-            
+                      
             <div>
             <label for="description">Description:</label>
             <textarea id="description" name="description" required><?php echo htmlspecialchars($product['description']); ?></textarea>
             </div>
-            <br><br><br>
+            
             <label for="categoryID">Category:</label>
             <select id="categoryID" name="categoryID" required>
                 <option value="1" <?php echo $product['categoryID'] == 1 ? 'selected' : ''; ?>>Category 1</option>
@@ -40,7 +39,7 @@ require_once __DIR__ . '/../../header.php';
                 <option value="3" <?php echo $product['categoryID'] == 3 ? 'selected' : ''; ?>>Category 3</option>
                 <option value="4" <?php echo $product['categoryID'] == 4 ? 'selected' : ''; ?>>Category 4</option>
             </select>
-            <br>
+            
             <button type="submit">Update Product</button>
         </formm>
         </section>

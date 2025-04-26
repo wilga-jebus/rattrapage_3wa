@@ -3,8 +3,8 @@
 require_once __DIR__ . '/../header.php';
 ?>
      <div class="row limited">
-        <section class="column small-12  form-title">
-            <h1>Manage Products</h1> 
+        <section class="column small-12 ">
+            <h1 class="row-center-h1">Manage Products</h1> 
         </section>
     </div>
 

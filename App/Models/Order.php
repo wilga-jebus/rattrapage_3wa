@@ -24,20 +24,29 @@ class Order
     // Get a single order by its ID
     public function getOrderById($id)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM orders WHERE orderID = :id");
+        $stmt = $this->pdo->prepare("
+            SELECT 
+                o.orderID, o.orderDate, o.shipAmount, o.taxAmount, o.shipDate, o.shipAddressID, 
+                p.productID, p.productCode, p.productName, p.listPrice,
+                c.categoryName,
+                oi.itemPrice, oi.quantity, 
+                u.emailAddress, u.firstName, u.lastName
+            FROM orders o
+            LEFT JOIN orderitems oi
+                ON oi.orderID = o.orderID
+            LEFT JOIN products p
+                ON p.productID = oi.productID
+            LEFT JOIN categories c 
+                ON c.categoryID = p.categoryID
+            LEFT JOIN users u
+                ON u.userID = o.userID    
+            WHERE o.orderID = :id");
         $stmt->bindParam(':id', $id);
-        $stmt->execute();
-        return $stmt->fetch();
-    }
-
-    // Get order items by order ID
-    public function getOrderItemsByOrderId($orderId)
-    {
-        $stmt = $this->pdo->prepare("SELECT * FROM order_items WHERE orderID = :orderId");
-        $stmt->bindParam(':orderId', $orderId);
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    
 
     // Add a new order to the database
     public function addOrder($userId, $orderDate, $totalAmount, $status)

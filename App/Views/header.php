@@ -6,10 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,700;1,300&display=swap"
         rel="stylesheet">
-    <!-- <link rel="stylesheet" href="./public/css/normalize.css">
-    <link rel="stylesheet" href="./public/css/small.css">
-    <link rel="stylesheet" href="./public/css/medium.css">
-    <link rel="stylesheet" href="./public/css/large.css"> -->
+    
     <link rel="stylesheet" href="./public/css/sass.css">
 
 

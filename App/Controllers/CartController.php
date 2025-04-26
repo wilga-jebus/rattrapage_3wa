@@ -18,7 +18,7 @@ class CartController
     {
         $cartModel = new Cart();
         $cartItems = $cartModel->getCartItems();
-        require_once __DIR__ . '/../views/cart/index.php';
+        require_once __DIR__ . '/../Views/cart/index.php';
     }
 
     // Add a product to the cart

@@ -13,6 +13,13 @@ spl_autoload_register(function ($class) {
 // Check if the 'route' parameter exists in the query string
 if (array_key_exists('route', $_GET)) {
     switch ($_GET['route']) {
+
+
+
+        //*****************************************************************************
+        // Routes allowed to all users (signed in Or not)
+        //*****************************************************************************
+
         case 'home':
             $controller = new App\Controllers\HomeController($pdo);
             $controller->index();
@@ -26,123 +33,6 @@ if (array_key_exists('route', $_GET)) {
         case 'register':
             $controller = new App\Controllers\UserController($pdo);
             $controller->register();
-            break;
-
-        case 'back_to_dashboard':
-
-            if ($_SESSION['isadmin'] == 1) {
-                require_once __DIR__ . '/App/Views/admin/index.php';
-            } else {
-                header('Location: index.php?route=login');
-            }
-
-            break;
-
-        case 'admin/register':
-            $controller = new App\Controllers\UserController($pdo);
-            $controller->adminRegister();
-            break;
-
-        case 'profile':
-            $controller = new App\Controllers\UserController($pdo);
-            $controller->profile();
-            break;
-
-        case 'logout':
-            $controller = new App\Controllers\UserController($pdo);
-            $controller->logout();
-            break;
-
-        case 'admin_dashboard':
-            $controller = new App\Controllers\AdminController($pdo);
-            $controller->index();
-            break;
-
-
-        case 'admin/products':
-            $controller = new App\Controllers\AdminController($pdo);
-            $controller->manageProducts();
-            break;
-
-
-        case 'admin/add_product':
-            $controller = new App\Controllers\AdminController($pdo);
-            $controller->addProduct();
-            break;
-
-        case 'admin/edit_product':
-            if (isset($_GET['id'])) {
-                $controller = new App\Controllers\AdminController($pdo);
-                $controller->editProduct($_GET['id']);
-            } else {
-                header('Location: index.php?route=admin/products');
-                exit();
-            }
-            break;
-
-        case 'admin/delete_product':
-            if (isset($_GET['id'])) {
-                $controller = new App\Controllers\AdminController($pdo);
-                $controller->deleteProduct($_GET['id']);
-            } else {
-                header('Location: index.php?route=admin/products');
-                exit();
-            }
-            break;
-
-        case 'admin/update_product':
-            if (isset($_GET['id'])) {
-                $controller = new App\Controllers\AdminController($pdo);
-                $controller->updateProduct($_GET['id']);
-            } else {
-                header('Location: index.php?route=admin/products');
-                exit();
-            }
-            break;
-
-        case 'admin/user':
-            $controller = new App\Controllers\AdminController($pdo);
-            $controller->manageUsers();
-            break;
-
-        case 'admin_manage_users':
-            $controller = new App\Controllers\AdminController($pdo);
-            $controller->manageUsers();
-            break;
-
-        case 'admin_edit_user':
-            if (isset($_GET['id'])) {
-                $controller = new App\Controllers\AdminController($pdo);
-                $controller->editUser($_GET['id']);
-            } else {
-                header('Location: index.php?route=admin_manage_users');
-                exit();
-            }
-            break;
-
-        case 'admin_delete_user':
-            if (isset($_GET['id'])) {
-                $controller = new App\Controllers\AdminController($pdo);
-                $controller->deleteUser($_GET['id']);
-            } else {
-                header('Location: index.php?route=admin_manage_users');
-                exit();
-            }
-            break;
-
-        case 'admin_update_user':
-            if (isset($_GET['id'])) {
-                $controller = new App\Controllers\AdminController($pdo);
-                $controller->updateUser($_GET['id']);
-            } else {
-                header('Location: index.php?route=admin_manage_users');
-                exit();
-            }
-            break;
-
-        case 'admin/orders':
-            $controller = new App\Controllers\AdminController($pdo);
-            $controller->manageOrders();
             break;
 
         case 'products':
@@ -200,41 +90,6 @@ if (array_key_exists('route', $_GET)) {
             $controller->clear();
             break;
 
-        case 'checkout':
-            $controller = new App\Controllers\CheckoutController($pdo);
-            $controller->index();
-            break;
-
-        case 'invoices':
-            $controller = new App\Controllers\InvoiceController($pdo);
-            $controller->index();
-            break;
-
-        case 'invoice_view':
-            if (isset($_GET['id'])) {
-                $controller = new App\Controllers\InvoiceController($pdo);
-                $controller->view($_GET['id']);
-            } else {
-                header('Location: index.php?route=invoices');
-                exit();
-            }
-            break;
-
-        case 'invoice_create':
-            $controller = new App\Controllers\InvoiceController($pdo);
-            $controller->create();
-            break;
-
-        case 'invoice_delete':
-            if (isset($_GET['id'])) {
-                $controller = new App\Controllers\InvoiceController($pdo);
-                $controller->delete($_GET['id']);
-            } else {
-                header('Location: index.php?route=invoices');
-                exit();
-            }
-            break;
-
         case 'categories':
             $controller = new App\Controllers\CategoryController($pdo);
             $controller->index();
@@ -249,6 +104,217 @@ if (array_key_exists('route', $_GET)) {
                 exit();
             }
             break;
+
+
+
+        //****************************************************************************************************
+        // Routes allowed once signed in (users or admin)
+        //*****************************************************************************************************
+
+        case 'profile':
+            (new App\Controllers\MiddlewareController())->isConnected();
+
+            $controller = new App\Controllers\UserController($pdo);
+            $controller->profile();
+            break;
+
+        case 'logout':
+            (new App\Controllers\MiddlewareController())->isConnected();
+
+            $controller = new App\Controllers\UserController($pdo);
+            $controller->logout();
+            break;
+
+        case 'checkout':
+            (new App\Controllers\MiddlewareController())->isConnected();
+
+            $controller = new App\Controllers\CheckoutController($pdo);
+            $controller->index();
+            break;
+
+
+
+ //*******************************************************************************************
+//                                    Routes: only admin allowed
+//*******************************************************************************************
+
+        case 'back_to_dashboard':
+            (new App\Controllers\MiddlewareController())->hasRoleAdmin();
+            require_once __DIR__ . '/App/Views/admin/index.php';
+            break;
+
+        case 'admin/register':
+            (new App\Controllers\MiddlewareController())->hasRoleAdmin();
+
+            $controller = new App\Controllers\UserController($pdo);
+            $controller->adminRegister();
+            break;
+
+        case 'admin_dashboard':
+            (new App\Controllers\MiddlewareController())->hasRoleAdmin();
+
+            $controller = new App\Controllers\AdminController($pdo);
+            $controller->index();
+            break;
+
+        case 'admin/products':
+            (new App\Controllers\MiddlewareController())->hasRoleAdmin();
+
+            $controller = new App\Controllers\AdminController($pdo);
+            $controller->manageProducts();
+            break;
+
+        case 'admin/add_product':
+            (new App\Controllers\MiddlewareController())->hasRoleAdmin();
+
+            $controller = new App\Controllers\AdminController($pdo);
+            $controller->addProduct();
+            break;
+
+        case 'admin/edit_product':
+            (new App\Controllers\MiddlewareController())->hasRoleAdmin();
+
+            if (isset($_GET['id'])) {
+                $controller = new App\Controllers\AdminController($pdo);
+                $controller->editProduct($_GET['id']);
+            } else {
+                header('Location: index.php?route=admin/products');
+                exit();
+            }
+            break;
+
+        case 'admin/delete_product':
+            (new App\Controllers\MiddlewareController())->hasRoleAdmin();
+
+            if (isset($_GET['id'])) {
+                $controller = new App\Controllers\AdminController($pdo);
+                $controller->deleteProduct($_GET['id']);
+            } else {
+                header('Location: index.php?route=admin/products');
+                exit();
+            }
+            break;
+
+        case 'admin/update_product':
+            (new App\Controllers\MiddlewareController())->hasRoleAdmin();
+
+            if (isset($_GET['id'])) {
+                $controller = new App\Controllers\AdminController($pdo);
+                $controller->updateProduct($_GET['id']);
+            } else {
+                header('Location: index.php?route=admin/products');
+                exit();
+            }
+            break;
+
+        case 'admin/user':
+            (new App\Controllers\MiddlewareController())->hasRoleAdmin();
+
+            $controller = new App\Controllers\AdminController($pdo);
+            $controller->manageUsers();
+            break;
+
+        case 'admin_manage_users':
+            (new App\Controllers\MiddlewareController())->hasRoleAdmin();
+
+            $controller = new App\Controllers\AdminController($pdo);
+            $controller->manageUsers();
+            break;
+
+        case 'admin_edit_user':
+            (new App\Controllers\MiddlewareController())->hasRoleAdmin();
+
+            if (isset($_GET['id'])) {
+                $controller = new App\Controllers\AdminController($pdo);
+                $controller->editUser($_GET['id']);
+            } else {
+                header('Location: index.php?route=admin_manage_users');
+                exit();
+            }
+            break;
+
+        case 'admin_delete_user':
+            (new App\Controllers\MiddlewareController())->hasRoleAdmin();
+
+            if (isset($_GET['id'])) {
+                $controller = new App\Controllers\AdminController($pdo);
+                $controller->deleteUser($_GET['id']);
+            } else {
+                header('Location: index.php?route=admin_manage_users');
+                exit();
+            }
+            break;
+
+        case 'admin_update_user':
+            (new App\Controllers\MiddlewareController())->hasRoleAdmin();
+
+            if (isset($_GET['id'])) {
+                $controller = new App\Controllers\AdminController($pdo);
+                $controller->updateUser($_GET['id']);
+            } else {
+                header('Location: index.php?route=admin_manage_users');
+                exit();
+            }
+            break;
+
+        case 'admin_view_order':
+            (new App\Controllers\MiddlewareController())->hasRoleAdmin();
+
+            if (isset($_GET['id'])) {
+                $controller = new App\Controllers\AdminController($pdo);
+                $controller->viewOrder($_GET['id']);
+            } else {
+                header('Location: index.php?route=admin_manage_users');
+                exit();
+            }
+            break;
+
+        case 'admin/orders':
+            (new App\Controllers\MiddlewareController())->hasRoleAdmin();
+
+            $controller = new App\Controllers\AdminController($pdo);
+            $controller->manageOrders();
+            break;
+
+        case 'invoices':
+            (new App\Controllers\MiddlewareController())->hasRoleAdmin();
+
+            $controller = new App\Controllers\InvoiceController($pdo);
+            $controller->index();
+            break;
+
+        case 'invoice_view':
+            (new App\Controllers\MiddlewareController())->hasRoleAdmin();
+
+            if (isset($_GET['id'])) {
+                $controller = new App\Controllers\InvoiceController($pdo);
+                $controller->view($_GET['id']);
+            } else {
+                header('Location: index.php?route=invoices');
+                exit();
+            }
+            break;
+
+        case 'invoice_create':
+            (new App\Controllers\MiddlewareController())->hasRoleAdmin();
+
+            $controller = new App\Controllers\InvoiceController($pdo);
+            $controller->create();
+            break;
+
+        case 'invoice_delete':
+            (new App\Controllers\MiddlewareController())->hasRoleAdmin();
+
+            if (isset($_GET['id'])) {
+                $controller = new App\Controllers\InvoiceController($pdo);
+                $controller->delete($_GET['id']);
+            } else {
+                header('Location: index.php?route=invoices');
+                exit();
+            }
+            break;
+
+
 
         default:
             header('Location: index.php?route=home');

@@ -27,7 +27,6 @@ class Product
     // Get a single product by its ID
     public function getProductById($id)
     {
-        $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
         $stmt = $this->pdo->prepare("
             SELECT p.*, c.categoryName 
             FROM products p
@@ -42,12 +41,6 @@ class Product
     // Update a product in the database
     public function updateProduct($id, $name, $price, $description, $categoryID)
     {
-        $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
-        $name = filter_var($name, FILTER_SANITIZE_STRING);
-        $price = filter_var($price, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-        $description = filter_var($description, FILTER_SANITIZE_STRING);
-        $categoryID = filter_var($categoryID, FILTER_SANITIZE_NUMBER_INT);
-
         $stmt = $this->pdo->prepare("UPDATE products SET productName = :name, listPrice = :price, description = :description, categoryID = :categoryID WHERE productID = :id");
         $stmt->bindParam(':name', $name, \PDO::PARAM_STR);
         $stmt->bindParam(':price', $price, \PDO::PARAM_STR);
@@ -60,13 +53,9 @@ class Product
     // Add a new product to the database
     public function addProduct($name, $price, $description, $categoryID, $dateAdded)
     {
-        $name = filter_var($name, FILTER_SANITIZE_STRING);
-        $price = filter_var($price, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-        $description = filter_var($description, FILTER_SANITIZE_STRING);
-        $categoryID = filter_var($categoryID, FILTER_SANITIZE_NUMBER_INT);
-        $dateAdded = filter_var($dateAdded, FILTER_SANITIZE_STRING);
-
         // Generate a unique product code
+        
+        
         do {
             $productCode = uniqid('prod_');
             $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM products WHERE productCode = :productCode");
@@ -90,9 +79,7 @@ class Product
 
     // Delete a product from the database
     public function deleteProduct($id)
-    {
-        $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
-        $stmt = $this->pdo->prepare("DELETE FROM products WHERE productID = :id");
+    {        $stmt = $this->pdo->prepare("DELETE FROM products WHERE productID = :id");
         $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
         $stmt->execute();
     }

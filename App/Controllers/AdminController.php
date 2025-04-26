@@ -60,8 +60,37 @@ class AdminController
     {
         $orderModel = new Order($this->pdo);
         $order = $orderModel->getOrderById($id);
-        require_once __DIR__ . '/../Views/admin/order.php';
+        
+        $infosOrder = [
+            'orderID'       => $order[0]['orderID'],
+            'orderDate'     => $order[0]['orderDate'],
+            'shipAmount'    => $order[0]['shipAmount'],
+            'taxAmount'     => $order[0]['taxAmount'],
+            'shipDate'      => $order[0]['shipDate'],
+            'shipAddressID' => $order[0]['shipAddressID'],
+            'emailAddress'  => $order[0]['emailAddress'],
+            'firstName'     => $order[0]['firstName'],
+            'lastName'      => $order[0]['lastName'],
+        ];
+        
+        $infosProducts = [];
+        $totalOrder = 0;
+        
+        foreach($order as $order) {
+            $infosProducts[] = [
+                'productID'     => $order['productID'],
+                'productCode'   => $order['productCode'],
+                'productName'   => $order['productName'],
+                'categoryName'  => $order['categoryName'],
+                'itemPrice'     => $order['itemPrice'],
+                'quantity'      => $order['quantity']
+            ];
+            $totalOrder = $totalOrder + ($order['itemPrice']*$order['quantity']);
+        }
+        
+        require_once __DIR__ . '/../Views/admin/orders/view_order.php';
     }
+
 
     // Handle editing a user
     public function editUser($id)
@@ -166,17 +195,5 @@ class AdminController
         require_once __DIR__ . '/../Views/admin/products/delete_validation.php';
     }
 
-    // Handle updating an order status
-    public function updateOrderStatus($id)
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $status = filter_var($_POST['status'], FILTER_SANITIZE_STRING);
-
-            $orderModel = new Order($this->pdo);
-            $orderModel->updateOrderStatus($id, $status);
-
-            header('Location: index.php?route=admin_manage_orders');
-            exit();
-        }
-    }
+    
 }
