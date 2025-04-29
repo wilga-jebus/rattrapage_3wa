@@ -322,7 +322,7 @@ body {
   font-family: "Lato", sans-serif;
   font-size: 16px;
   font-weight: 300;
-  background-color: #f9f9f9;
+  min-height: 100vh;
 }
 
 /* GRID */
@@ -341,16 +341,15 @@ body {
   margin: 0 auto;
 }
 
-.login-form-height, .register-form {
-  width: 7rem;
+.login-form-height, .register-form-height {
+  height: 20rem;
 }
 
 table td {
   font-weight: bold;
-  color: red;
+  color: #ff9800;
   text-align: center;
-  height: 5rem;
-  font-size: 3rem;
+  height: 3rem;
 }
 
 .limited {
@@ -359,7 +358,6 @@ table td {
 }
 
 .column {
-  /* float: left;*/
   padding: 0 2vw;
   margin: 0 0 0.75rem 0;
 }
@@ -383,12 +381,6 @@ header {
   background-color: #FF4500;
 }
 
-header img {
-  float: left;
-  height: 85px;
-  padding-right: 10px;
-}
-
 header h1, header h2 {
   margin: 0;
   color: #fff;
@@ -407,10 +399,10 @@ header h2 {
 }
 
 /* navigation rules */
-button#hamburgerBtn {
+button, #guitarBtn {
   background: none;
   border: none;
-  color: #fff;
+  color: hsl(0, 77%, 48%);
   font-size: 2.4rem;
   cursor: pointer;
   padding: 0 30px 0 2vw;
@@ -458,6 +450,11 @@ main img {
   height: auto;
 }
 
+main .homePageImage {
+  width: 100%;
+  height: 500px;
+}
+
 main h1, main h3 {
   color: #FF4500;
   font-style: italic;
@@ -478,7 +475,7 @@ main p {
   position: relative;
 }
 
-.labeled h6, .labeled p {
+.labeled h6 {
   position: absolute;
   background-color: rgba(255, 255, 255, 0.7);
   margin: 0;
@@ -502,9 +499,20 @@ main p {
   width: 60%;
 }
 
+.section-form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.edit-user-form {
+  height: 16rem;
+}
+
 footer {
   background-color: #FF4500;
   font-size: 1.2rem;
+  color: #fff;
 }
 
 footer h2 {
@@ -513,6 +521,9 @@ footer h2 {
   margin: 1rem 0 0.3rem 0;
 }
 
+footer li {
+  list-style-type: none;
+}
 
 @media only screen and (min-width: 768px) {
   header h1 {
@@ -537,16 +548,42 @@ footer h2 {
   }
   nav ul {
     display: block;
+    /* width: 30%;*/
+    display: flex;
+    justify-content: space-between;
   }
   nav li {
     width: 25%;
     float: left;
   }
-} /* end of media query */
+  .section-form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .edit-user-form {
+    height: 16rem;
+  }
+  /* end of media query */
+}
 @media only screen and (min-width: 1140px) {
   .large-3 {
     /*idth: 25%;*/
     flex-basis: 25%;
+  }
+  .large-6 {
+    flex-basis: 50%;
+  }
+  .section-form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .edit-user-form {
+    height: 16rem;
+  }
+  .edit-category-table {
+    height: 20rem;
   }
   nav ul {
     margin-left: 2vw;
@@ -557,6 +594,7 @@ footer h2 {
   nav a {
     padding: 0.7rem 1rem;
   }
-} /* end of media query */
+  /* end of media query */
+}
 
 /*# sourceMappingURL=sass.css.map */

@@ -7,8 +7,8 @@
     </div>
             
     <div class="row limited">
-    <section class="column small-12">
-        <table class="login-form">
+    <section class="column small-12 section-form">
+        <table class="edit-user-form">
             <tr>>
             <td><a href="index.php?route=admin/products">Manage Products</a></td>
             </tr>

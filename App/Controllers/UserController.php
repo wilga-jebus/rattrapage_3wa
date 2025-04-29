@@ -136,11 +136,34 @@ class UserController
             $lastName = filter_var($_POST['lastName'], FILTER_SANITIZE_STRING);
             $isadmin = 1; // Always set to 1 for admin registration
 
+            $errors = [];
+
+            if (strlen(trim($password)) < 8) {
+                $errors[] = "La longueur du mot de passe doit être d'au moins 8 caractères.";// translate in english in final version.
+            }
+            
+            if(empty(trim($firstName)) || strlen(trim($firstName)) < 2) {
+                $errors[] = "Veuillez renseigner votre firstName.(minimum 2 lettres)";
+            }
+            
+            if(empty(trim($lastName)) || strlen(trim($lastName)) < 2) {
+                $errors[] = "Veuillez renseigner votre lastName.(minimum 2 lettres)";
+            }
+            
+            if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $errors[] = "Veuillez renseigner une adresse email valide.";
+            }
+
+            if(empty($errors)){
+
             $userModel = new User($this->pdo);
             $userModel->createAdmin($email, $password, $firstName, $lastName);
 
             header('Location: index.php?route=admin');
             exit();
+
+            }
+            
         }
 
         require_once __DIR__ . '/../Views/admin/admin_register.php';

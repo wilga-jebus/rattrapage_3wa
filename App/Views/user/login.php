@@ -10,7 +10,7 @@ require_once __DIR__ . '/../header.php';
 </div>
 
 <div class="row limited">>
-    <section class="column small-12 ">
+    <section class="column small-12 section-form">
 
         <?php if (isset($errors) && count($errors) > 0): ?>
             <section id="errors" class="errors-messages-container">
@@ -22,7 +22,7 @@ require_once __DIR__ . '/../header.php';
             </section>
         <?php endif; ?>
 
-        <form method="post" action="index.php?route=login" class="login-form login-form-height">
+        <form method="post" action="index.php?route=login" class="edit-user-form">
             <div>
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required aria-required="true">

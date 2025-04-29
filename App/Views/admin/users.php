@@ -1,14 +1,20 @@
 <?php
 $title = 'Manage Users';
 require_once __DIR__ . '/../header.php';
+
 ?>
+<div class="row limited">
+    <section class="column small-12 row-center-h1">
+        <h1>Manage Users</h1>
+    </section>
+</div>
 
-<div role="main" class="main-content">
-    <h1>Manage Users</h1>
-
+<div  class="row limited">
+    
+    <session class="column small-12 section-form">
     <!-- List of users -->
     <h2>User List</h2>
-    <table class="users-table">
+    <table class="user-edit-form">
         <thead>
             <tr>
                 <th>User ID</th>
@@ -39,6 +45,7 @@ require_once __DIR__ . '/../header.php';
             <?php endif; ?>
         </tbody>
     </table>
+    </session>
 </div>
 
 <?php

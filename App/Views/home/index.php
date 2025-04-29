@@ -4,79 +4,53 @@
 
 <div class="row limited">
     <section class="column small-12">
-        <img src="public/images/homePage/homepage.jpg" class="homepage" alt="" width="1140" height="561">
-    </section>
-</div>
+        <img id=carousel src="public/images/homePage/carousel1.jpg" class="homepage homePageImage" alt="carousel Image" width="1140"
+            height="300">
+      <div class="row-center-h1">
+        <button onclick="previous()">Previous</button>
+        <button onclick="next()">Next</button>
+      </div>  
 
-<div class="row limited">
-    <section class="column small-12 ">
-        <h1>Our Specials Products</h1>
     </section>
-</div>
-<div class="row limited">
-    <section class="column small-12 medium-6 labeled">
-        <img src="public/images/products/GTR002.jpg" alt="" width="250"height="250">
-        <h6>GUITARE 1</h6>
-                <select class="currency-selector">
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                    <option value="GBP">GBP</option>
-                    <!-- Add more currencies as needed -->
-                </select>
-                <p class="price">1000$</p>
-             <p><a href="#">add to cart </a></p>
-    </section>
-    <section class="column small-12 medium-6 labeled">
-        <img src="public/images/products/GTR002.jpg" alt="">
-        <h6>GUITARE2</h6>
-            <p class="price">1000$</p>
-                <select class="currency-selector">
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                    <option value="GBP">GBP</option>
-                    <!-- Add more currencies as needed -->
-                </select>
-             <p><a href="#">add to cart</a></p>
-    </section>
-    <section class="column small-12 medium-6 labeled">
-        <img src="public/images/products/GTR002.jpg" alt="">
-        <h6>GUITARE3</h6>
-            <p class="price">1000$</p>
-                <select class="currency-selector">
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                    <option value="GBP">GBP</option>
-                    <!-- Add more currencies as needed -->
-                </select>
-             <p><a href="#">add to cart</a></p>
-    </section>
-    <section class="column small-12 medium-6 labeled">
-        <img src="public/images/products/GTR002.jpg" alt="">
-        <h6>GUITARE2</h6>
-            <p class="price">1000$</p>
-                <select class="currency-selector">
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                    <option value="GBP">GBP</option>
-                    <!-- Add more currencies as needed -->
-                </select>
-             <p><a href="#">add to cart</a></p>
-    </section>
-    <section class="column small-12 medium-6 labeled">
-        <img src="public/images/products/GTR002.jpg" alt="">
-        <h6>GUITARE4</h6>
-            <p class="price">1000$</p>
-                <select class="currency-selector">
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                    <option value="GBP">GBP</option>
-                    <!-- Add more currencies as needed -->
-                </select>
-             <p><a href="#">add to cart</a></p>
-    </section>
+    </div>
+
+    <div class="row limited">
+        <section class="column small-12 row-center-h1">
+            <h1>Our Special Products</h1>
+        </section>
+    </div>
+    <div class="row limited">
+        <?php if (is_array($products) || is_object($products)): ?>
+            <?php foreach ($products as $product): ?>
+                <?php if($product['productCode'] == "GTR003"||$product['productCode'] == "GTR004"): ?>
+                <section class="column small-6 medium-4  large-3">
+                    <img src="public/images/products/<?php echo htmlspecialchars($product['productCode']); ?>.png" alt="<?php echo htmlspecialchars($product['productName']); ?>">
+                    <h2><?php echo htmlspecialchars($product['productName']); ?></h2>
+                    <p><?php echo htmlspecialchars($product['description']); ?></p>
+                    <p class="price" data-price=<?php echo htmlspecialchars($product['listPrice']); ?>><?php echo htmlspecialchars($product['listPrice']); ?><span class="currency"></span></p>
+                    <label for="currency-selector-<?php echo htmlspecialchars($product['productID']); ?>">Choose currency:</label>
+                    <select name="currency-selector" class="currency-selector" id="currency-selector"<?php echo htmlspecialchars($product['productID']); ?>>
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="GBP">GBP</option>
+                    </select>
+                    
+                    <div class="product-actions">
+                        <a href="index.php?route=product&id=<?php echo htmlspecialchars($product['productID']); ?>">View Details</a>
+                        <a href="index.php?route=cart_add&id=<?php echo htmlspecialchars($product['productID']); ?>&code=<?php echo htmlspecialchars($product['productCode']); ?>">Add to Cart</a>
+                    </div>
+                </section>
+                <?php endif ?>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No products available.</p>
+        <?php endif; ?>
+    </div>
+        
+        
 
 
 
 
-</div>
-<?php require_once __DIR__ . '/../footer.php'; ?>
+    
+    <?php require_once __DIR__ . '/../footer.php'; ?>

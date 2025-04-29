@@ -1,12 +1,12 @@
 <?php
 
-$title = 'Shopping Cart';
+
 require_once __DIR__ . '/../header.php';
 
 ?>
 <div class="row limited">
-        <section class="column small-12  form-title">
-            <h1>Shopping Cart</h1> 
+        <section class="column small-12 ">
+            <h1 class="row-center-h1">Shopping Cart</h1> 
         </section>
     </div>
 
@@ -14,8 +14,8 @@ require_once __DIR__ . '/../header.php';
     
 
     <?php if (!empty($cartItems)): ?>
-        <section class="column small-112">
-        <table class="">
+        <section class="column small-12 medium-6 large-6 section-form">
+        <table class="edit-user-form">
             <thead>
                 <tr>
                     <th>Product Image</th>
@@ -48,7 +48,9 @@ require_once __DIR__ . '/../header.php';
         <a href="index.php?route=cart_clear" class="clear-cart">Clear Cart</a>
         </div>
     <?php else: ?>
+        <div>
         <p>Your cart is empty.</p>
+        </div>
     <?php endif; ?>
     </section>
 </div>

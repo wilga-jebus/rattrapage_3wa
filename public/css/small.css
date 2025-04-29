@@ -47,7 +47,7 @@ header h2{
 
 
 /* navigation rules */
-button#hamburgerBtn { 
+button#guitarBtn { 
     background: none;
     border:none;
     color: #fff;
@@ -131,8 +131,3 @@ footer h2 {
 
 
 
-.clearfix:after {
-  content: "";
-  display: table;
-  clear: both;
-}

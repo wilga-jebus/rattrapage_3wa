@@ -23,10 +23,10 @@
             </section>
         </div> <!-- end row -->
     </header>
-    <nav >
-        <div class="row limited">
+    <nav>
+        <div class="row limited ">
             <button id="guitarBtn">&#9776;</button>
-            <ul class="primaryNav ">
+            <ul id="primaryNav" class="medium-6 ">
                 <li class="active"><a href="index.php?route=home">HOME</a></li>
                 <?php if (isset($_SESSION['isadmin']) && $_SESSION['isadmin'] == 0): ?>
                     <li><a href="index.php?route=products">Guitars</a></li>
@@ -38,7 +38,7 @@
                 <?php else: ?>
                     <li><a href="index.php?route=products">Guitars</a></li>
                     <li><a href="index.php?route=categories">Categories</a></li>
-                    <li><a href="index.php?route=cart">CART</a></li>
+                    <li><a href="index.php?route=cart">Cart</a></li>
                     <li><a id="login-logout-link" href="index.php?route=login">Login</a></li>
                 <?php endif; ?>
             </ul>

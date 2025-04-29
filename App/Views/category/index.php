@@ -8,9 +8,9 @@
     </div>
      
 <div class="row limited">
-  <section class="column small-12 ">
+  <section class="column small-12 section-form">
     
-        <table class="login-form">
+        <table class="edit-category-table">
             <?php if (isset($categories) && is_array($categories)): ?>
                 <?php foreach ($categories as $category): ?>
                     <tr>

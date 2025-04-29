@@ -1,14 +1,18 @@
 <?php
-$title = 'Manage Orders';
+
 require_once __DIR__ . '/../../header.php';
 ?>
 
-<div role="main" class="main-content">
-    <h1>Manage Orders</h1>
+<div class="row limited">
+    <section class="column small-12">
+        <h1 class="row-center-h1">Manage Orders</h1>
+    </section>
+</div>
+    
 
     <!-- List of orders -->
     <h2>Order List</h2>
-    <table class="orders-table">
+    <table class="">
         <thead>
             <tr>
                 <th>Order ID</th>
@@ -40,7 +44,6 @@ require_once __DIR__ . '/../../header.php';
                 </tr>
             <?php endif; ?>
         </tbody>
-    </table>
-</div>
+            </table>
 
 <?php require_once __DIR__ . '/../../footer.php'; ?>

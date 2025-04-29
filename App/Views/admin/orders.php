@@ -1,13 +1,19 @@
 <?php
-$title = 'Manage Orders';
+
 require_once __DIR__ . '/../header.php';
 
 ?>
 
+<div class="row limited">
+    <section class="column small-12 row-center-h1">
+        <h1>Manage Orders</h1>
+    </section>
+</div>
+<div class="row limited">
 
-<div>
-    <h1>Manage Orders</h1>
-    <table>
+    <section class="column small-12 section-form">
+    
+    <table class="edit-user-form">
         <thead>
             <tr>
                 <th>Order ID</th>
@@ -35,6 +41,7 @@ require_once __DIR__ . '/../header.php';
             <?php endforeach; ?>
         </tbody>
     </table>
+    </section>
 </div>
 
 <?php require_once __DIR__ . '/../footer.php'; ?>
